@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import "../index.css";
 import myImage from"../assets/logo.png";
+import { signUp } from '../store/auth';
 
 interface FormValue {
   firstName: string;
@@ -75,6 +76,7 @@ export default function RegisterPage() {
     event.preventDefault();
     if (validateForm()) {
       console.log('form value', formValue);
+      signUp(formValue.email, formValue.password);
     } else {
       console.log('form invalid');
     }

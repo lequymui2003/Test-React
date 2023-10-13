@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import myImage from"../assets/logo.png";
+import { Login } from '../store/login';
 
 interface FormValue {
     email: string;
@@ -51,10 +52,13 @@ export default function LoginAccount(){
         });
       };
     
+      const nav = useNavigate();
       const handleSubmit = (event: React.FormEvent) => {
         event.preventDefault();
         if (validateForm()) {
           console.log('form value', formValue);
+          Login(formValue.email, formValue.password);
+          nav('/');
         } else {
           console.log('form invalid');
         }

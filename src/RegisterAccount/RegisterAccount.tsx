@@ -5,19 +5,13 @@ import myImage from"../assets/logo.png";
 import { signUp } from '../store/auth';
 
 interface FormValue {
-  firstName: string;
-  lastName: string;
   email: string;
   password: string;
-  confirmPassword: string;
 }
 
 const initFormValue: FormValue = {
-  firstName: '',
-  lastName: '',
   email: '',
   password: '',
-  confirmPassword: '',
 };
 
 const isEmptyValue = (value: string) => {
@@ -39,12 +33,6 @@ export default function RegisterPage() {
 
   const validateForm = () => {
     const error: Record<string, string> = {};
-    if (isEmptyValue(formValue.firstName)) {
-      error['firstName'] = 'Firt Name is required';
-    }
-    if (isEmptyValue(formValue.lastName)) {
-      error['lastName'] = 'Last Name is required';
-    }
     if (isEmptyValue(formValue.email)) {
       error['email'] = 'Email is required';
     } else {
@@ -54,11 +42,6 @@ export default function RegisterPage() {
     }
     if (isEmptyValue(formValue.password)) {
       error['password'] = 'Password is required';
-    }
-    if (isEmptyValue(formValue.confirmPassword)) {
-      error['confirmPassword'] = 'Confirm Password is required';
-    } else if (formValue.confirmPassword !== formValue.password) {
-      error['confirmPassword'] = 'Confirm Password not match';
     }
     setFormError(error);
     return Object.keys(error).length === 0;
@@ -114,37 +97,6 @@ export default function RegisterPage() {
                  <h1 className="title"> Đăng ký </h1>
                  <form onSubmit={handleSubmit}>
                    <div className="mb-2">
-                   <i className="fa-solid fa-user"></i>
-                     <input 
-                       id="first-name"
-                       className="form-control"
-                       type="text"
-                       name="firstName"
-                       placeholder="First name"
-                       value ={formValue.firstName}
-                       onChange={handleChange}
-                     />
-                   </div>
-                      {formError.firstName && (
-                        <div className="error-feedback">{formError.firstName}</div>
-                      )}
-                   <div className="mb-2">
-                     <i className="fa-solid fa-user"></i>
-                     <input 
-                       id="last-name"
-                       className="form-control"
-                       type="text"
-                       name="lastName"
-                       placeholder="Last name"
-                       value ={formValue.lastName}
-                       onChange={handleChange}
-                     />
-                    
-                   </div>
-                      {formError.lastName && (
-                        <div className="error-feedback">{formError.lastName}</div>
-                      )}
-                   <div className="mb-2">
                    <i className="fa-solid fa-envelope"></i>
                      <input 
                        id="email"
@@ -177,24 +129,6 @@ export default function RegisterPage() {
                    </div>
                       {formError.password && (
                         <div className="error-feedback">{formError.password}</div>
-                      )}
-                   <div className="mb-2">
-                   <i className="fa-solid fa-key"></i>
-                     <input 
-                       id="confirm-password"
-                       className="form-control"
-                       type={isPasswordVisible ? 'text' : 'password'}
-                       name="confirmPassword"
-                       placeholder="Confirm password"
-                       value ={formValue.confirmPassword}
-                       onChange={handleChange}
-                     />
-                     <div id="mb-2_eye" onClick={togglePasswordVisibility}>
-                        <i className={`fa ${isPasswordVisible ? 'fa-eye' : 'fa-eye-slash'}`}></i>
-                     </div>
-                   </div> 
-                      {formError.confirmPassword && (
-                        <div className="error-feedback">{formError.confirmPassword}</div>
                       )}
                    <button 
                    type="submit" 

@@ -165,8 +165,8 @@ export default function ProductPage1(){
              <div className="catalog-sidebar">
                  <span className="catalog-sidebar_title">Danh mục sản phẩm</span>
                  <div className="is-driver"></div>
-                 {dataCatagori.map((item1)=>
-                 <ul className="product-categories">
+                 {dataCatagori.map((item1, index)=>
+                 <ul className="product-categories" key={index}>
                      <li>
                          <p className="product-categories_children" onClick={()=>{
                             SetData(item1.data)
@@ -175,25 +175,24 @@ export default function ProductPage1(){
                  </ul>)}
              </div>
              <div className="catalog-product">
-                 {dataCurrent.map((item) => 
-                     <div className="product-small">
-                     <div className="product-small_img">
-                         <img src={item.image} alt="img" />
-                         <div className="quickly-view">
+                 {dataCurrent.map((item, index) => 
+                     <div className="product-small" key={index}>
+                        <div className="product-small_img">
+                                <img src={item.image} alt="img" />
+                            <div className="quickly-view">
                              <p>Xem ngay</p>
-                         </div>
-                     </div>
-                     <div className="product-small_category">
-                         <p>{item.loai}
-                         </p>
-                     </div>
-                     <div className="product-small_name">
-                         <p>{item.name}</p>
-                     </div>
-                     <div className="product-small_price">
-                         <p>{item.gia}</p>
-                     </div>
-                 </div>)}
+                            </div>
+                        </div>
+                        <div className="product-small_category">
+                            <p>{item.loai}</p>
+                        </div>
+                        <div className="product-small_name">
+                            <p>{item.name}</p>
+                        </div>
+                        <div className="product-small_price">
+                            <p>{item.gia}</p>
+                        </div>
+                    </div>)}
              </div>
          </div>
         </section>

@@ -27,8 +27,6 @@ export default function LoginAccount(){
     setPasswordVisible(!isPasswordVisible);
   };
     
-    
-
     const validateForm = () =>{
         const error: Record<string, string> = {};
         if (isEmptyValue(formValue.email)) {
@@ -57,13 +55,20 @@ export default function LoginAccount(){
         event.preventDefault();
         if (validateForm()) {
           console.log('form value', formValue);
-          Login(formValue.email, formValue.password);
-          nav('/');
+            
         } else {
           console.log('form invalid');
         }
       };
 
+      const handleLogin = async ()=>{
+            try {
+              await Login(formValue.email, formValue.password);
+              nav('/');
+            } catch (error) {
+              alert("Tài khoản và mật khẩu không chính xác");
+            }
+      }
     return(
         <>
         <header className="header">    
@@ -131,6 +136,7 @@ export default function LoginAccount(){
                     <button 
                    type="submit" 
                    className="submit-btn"
+                   onClick={handleLogin}
                    >
                        Đăng nhập
                    </button>

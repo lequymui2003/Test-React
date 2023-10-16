@@ -140,14 +140,13 @@ export default function ProductPage1(){
                 </form>
                 </div>
                 <div className="header-main_cart">
-                  <Link to='/login' className="link-login">Đăng nhập</Link>
                   <p>Giỏ hàng <i className="fa-solid fa-cart-shopping"></i></p>
                 </div>
               </div>
               <div className="header-bottom">
                 <ul className='menu'>
                   <li>Trang chủ</li>
-                  <li><Link to="/" className="menu_link-productPage">Sản phẩm</Link></li>
+                  <li><Link to="/product" className="menu_link-productPage">Sản phẩm</Link></li>
                   <li>Giới thiệu</li>
                   <li>Tin tức</li>
                 </ul>

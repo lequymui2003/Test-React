@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import img from "../assets/imgRegister-page.jpg";
 import "../index.css";
-import myImage from"../assets/logo.png";
 import { signUp } from '../store/auth';
+import { useNavigate } from 'react-router-dom';
 
 interface FormValue {
   email: string;
@@ -59,40 +59,27 @@ export default function RegisterPage() {
     event.preventDefault();
     if (validateForm()) {
       console.log('form value', formValue);
-      signUp(formValue.email, formValue.password);
     } else {
       console.log('form invalid');
     }
   };
 
+  const nav = useNavigate();
+  const handleSignUp = async() =>{
+    try {
+      await signUp(formValue.email, formValue.password);
+      nav('/')
+    } catch (error) {
+      alert("Đăng ký chưa thành công");
+    }
+  } 
+
   return (
     <>
-              <header className="header">    
-              <div className="header-main">
-                <div className="header-main_logo">
-                  <img src={myImage} alt=""/> 
-                </div>
-                <div className="header-main_search">
-                <form id="search-box">
-                  <input type="text" id="search-text" placeholder="Bạn muốn tìm gì ?" />
-                <button id="search-btn"><i className="fa-solid fa-magnifying-glass"></i></button>
-                </form>
-                </div>
-                <div className="header-main_cart">
-                  <Link to='/login' className="link-login">Đăng nhập</Link>
-                  <p>Giỏ hàng <i className="fa-solid fa-cart-shopping"></i></p>
-                </div>
-              </div>
-              <div className="header-bottom">
-                <ul className='menu'>
-                  <li>Trang chủ</li>
-                  <li><Link to="/" className="menu_link-productPage">Sản phẩm</Link></li>
-                  <li>Giới thiệu</li>
-                  <li>Tin tức</li>
-                </ul>
-              </div>
-        </header>
         <div className="register-page">
+            <div className="register-page-img">
+              <img src={img} alt='' />
+             </div>
              <div className="register-form-container">
                  <h1 className="title"> Đăng ký </h1>
                  <form onSubmit={handleSubmit}>
@@ -133,42 +120,13 @@ export default function RegisterPage() {
                    <button 
                    type="submit" 
                    className="submit-btn"
+                   onClick={handleSignUp}
                    >
                        Đăng ký
                    </button>
                  </form>        
              </div>  
         </div>
-
-        <footer className="footer">
-                <div className="footer-widgets">
-                    <div className='footer-widgets_follow'>
-                      <p>Fllow Us</p>
-                      <ul>
-                        <li><i className="fa-brands fa-facebook-square"></i></li>
-                        <li><i className="fa-brands fa-instagram"></i></li>
-                      </ul>
-                    </div>
-                    <div className="footer-widgets_instruct">
-                      <p>Hướng dẫn</p>
-                      <ul>
-                        <li>Điều khoản</li>
-                        <li>Hướng dẫn mua hàng</li>
-                        <li>Chính sách đổi trả hàng</li>
-                      </ul>
-                    </div>
-                    <div className='footer-widgets_Address'>
-                      <p>Địa chỉ</p>
-                      <ul>
-                        <li>Store I: 339 Nguyễn Văn Cừ, P. Ngọc Lâm, Quận Long Biên, Hà Nội</li>
-                        <li>Store II: 92 Hai Bà Trưng, P. Cửa Nam, Quận Hoàn Kiếm, Hà Nội</li>
-                      </ul>
-                    </div>
-                </div>
-                <div className="absolute-footer">
-                    <p>Copyright 2023 © remnetviet.vn</p>
-                </div>
-        </footer>
     </>
   );
 }

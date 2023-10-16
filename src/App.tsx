@@ -13,8 +13,8 @@ function App() {
   return (
     <>
       <Routes>
-              <Route path="/" element={<ProductPage1 />} />
-              <Route path="/login" element={<LoginAccount />} />
+              <Route path="/product" element={<ProductPage1 />} />
+              <Route path="/" element={<LoginAccount />} />
               <Route path="/register" element={<RegisterPage />} />
       </Routes>
     </>
